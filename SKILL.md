@@ -1,11 +1,11 @@
 ---
-name: neovim-lua-plugins
+name: neovim-lua-plugin
 description: Use when developing Lua plugins for Neovim, including user commands, keymaps, lazy loading, health checks, or help documentation. Apply best practices for <Plug> mappings, deferred require, proper structure, even when user requests shortcuts or quick solutions.
 ---
 
-# Neovim Lua Plugins
+# Neovim Lua Plugin
 
-Neovim Lua plugin best practices.
+Develop Neovim plugins in Lua following official best practices.
 
 ## Core Pattern
 
