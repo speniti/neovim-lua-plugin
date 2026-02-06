@@ -7,6 +7,7 @@ A comprehensive reference skill for developing Lua plugins for Neovim following 
 - [Type](#-type)
 - [When to Use](#-when-to-use)
 - [Key Principles](#-key-principles)
+- [File Structure](#-file-structure)
 - [Quick Reference](#-quick-reference)
 - [Core Pattern Example](#-core-pattern-example)
 - [Based On](#-based-on)
@@ -19,7 +20,7 @@ A comprehensive reference skill for developing Lua plugins for Neovim following 
 
 ## 📚 Type
 
-**Reference Skill** - Provides patterns, API documentation, and best practices for Neovim Lua plugin development.
+**Reference Skill** - Provides patterns, API documentation, and best practices for Neovim Lua plugin development. Modular structure with supporting files for detailed reference.
 
 ## 🎯 When to Use
 
@@ -32,6 +33,8 @@ Use this skill when:
 - 📄 Creating filetype-specific plugins in `ftplugin/`
 - 🔄 Adding autocommands with `nvim_create_autocmd()`
 - 🏥 Implementing health checks with `:checkhealth`
+- 🔌 Adding LSP integration to your plugin
+- 🌳 Using Treesitter queries/parsing
 - ⚡ **Even when user requests shortcuts or quick solutions**
 
 ## 🎓 Key Principles
@@ -43,15 +46,32 @@ Use this skill when:
 5. **Use `ftplugin/` for filetype plugins** - Not lazy.nvim `ft` specs
 6. **Add health checks** - Prevent user support issues
 
+## 📁 File Structure
+
+| File | Words | Purpose |
+|------|-------|---------|
+| `SKILL.md` | 256 | Core patterns and best practices |
+| `api-reference.md` | 992 | User commands, keymaps, autocommands API |
+| `examples.md` | 1,122 | Complete code patterns and examples |
+| `health-checks.md` | 669 | `:checkhealth` implementation guide |
+| `help-conventions.md` | 921 | Vimdoc (help file) writing guide |
+| `lsp.md` | 662 | LSP integration reference |
+| `treesitter.md` | 781 | Treesitter queries and parsing |
+| **Total** | **~5,937** | Comprehensive reference |
+
+**Token Efficiency:** Main `SKILL.md` is ~256 words. Supporting files are loaded on-demand based on the task.
+
 ## ⚡ Quick Reference
 
-| Task | API | Pattern |
-|------|-----|---------|
-| User command | `nvim_create_user_command()` | Defer `require()` into callback |
-| Keymap | `vim.keymap.set()` | Use `<Plug>(Action)` mappings |
-| Autocommand | `nvim_create_autocmd()` | Use `nvim_create_augroup()` for cleanup |
-| Lazy module | `require('module')` | Call inside function, not at top |
-| Health check | `vim.health.*` | Create `lua/plugin/health.lua` |
+| Task | API | Pattern | See Also |
+|------|-----|---------|----------|
+| User command | `nvim_create_user_command()` | Defer `require()` into callback | `api-reference.md` |
+| Keymap | `vim.keymap.set()` | Use `<Plug>(Action)` mappings | `api-reference.md` |
+| Autocommand | `nvim_create_autocmd()` | Use `nvim_create_augroup()` for cleanup | `api-reference.md` |
+| Lazy module | `require('module')` | Call inside function, not at top | `examples.md` |
+| Health check | `vim.health.*` | Create `lua/plugin/health.lua` | `health-checks.md` |
+| LSP integration | `vim.lsp.*` | `vim.lsp.config()` + `vim.lsp.enable()` | `lsp.md` |
+| Treesitter | `vim.treesitter.*` | Queries in `queries/{lang}/*.scm` | `treesitter.md` |
 
 ## 💡 Core Pattern Example
 
@@ -76,6 +96,8 @@ vim.keymap.set('n', '<leader>a', '<Plug>(MyAction)')
 Official Neovim documentation:
 - https://neovim.io/doc/user/lua-plugin.html
 - https://neovim.io/doc/user/lua-guide.html
+- https://neovim.io/doc/user/lsp.html
+- https://neovim.io/doc/user/treesitter.html
 - https://neovim.io/doc/user/health.html#health-dev
 - https://neovim.io/doc/user/helphelp.html#help-writing
 - https://neovim.io/doc/user/luaref.html
@@ -87,36 +109,44 @@ MIT License - Copyright (c) 2025 Simone Peniti
 See [LICENSE](LICENSE) file for details.
 
 ## 📊 Statistics
-- https://neovim.io/doc/user/lua-plugin.html
-- https://neovim.io/doc/user/lua-guide.html
-- https://neovim.io/doc/user/health.html#health-dev
-- https://neovim.io/doc/user/helphelp.html#help-writing
-- https://neovim.io/doc/user/luaref.html
-
-## 📊 Statistics
 
 | Metric | Value |
 |--------|-------|
-| Words | 4,071 |
-| Size | ~31 KB |
-| Lines | 1,025 |
-| Est. tokens | ~3,000-4,000 |
+| Main SKILL.md | 256 words (~200 tokens) |
+| All files | ~5,937 words |
+| Supporting files | 6 specialized references |
+| Structure | Modular, on-demand loading |
 
-**Note:** This is a **Reference Skill** with comprehensive API documentation and patterns. Larger than the recommended <200 words for frequently-loaded skills, but appropriate for reference material that is loaded on-demand.
+**Token Efficiency:** Main skill is under 300 words. Supporting files are loaded only when needed based on the task, saving ~80% tokens per query.
 
 ## ✅ Testing
 
-This skill was validated through TDD methodology with **100% success rate** (4/4 scenarios in v1.2 re-test). Successfully handles:
+This skill was validated through TDD methodology with **100% success rate** (8/8 scenarios in v1.3). Successfully handles:
 
-- 🔍 **Reference retrieval**: Help file conventions, health check API, Lua patterns
-- 🛡️ **Discipline enforcement**: `<Plug>` mapping pattern, health check requirements
+- 🔍 **Reference retrieval**: API docs, LSP, Treesitter, health checks, help conventions
+- 🛡️ **Discipline enforcement**: `<Plug>` mapping pattern, deferred require, even under pressure
 - 💪 **Pressure resistance**: Combined deadline + "ASAP" + explicit permission to skip standards
+- 📁 **File selection**: Correct supporting file chosen based on task
 
-Previous validation (v1.1): 83% success rate (5/6 scenarios).
+### Test Results
 
----
+| Phase | Tests | Result |
+|-------|-------|--------|
+| RED (baseline, no skill) | 3 | All skipped `<Plug>` under pressure |
+| GREEN (with skill) | 5 | All followed best practices |
+| File selection | 3 | All selected correct supporting file |
 
 ## 🚀 Enhancements
+
+### v1.3 ✨ (Current)
+
+**Major refactor to modular structure for token efficiency:**
+- 📉 Reduced main SKILL.md from 4,071 → 256 words (-94%)
+- 📁 Split into 6 specialized supporting files
+- 🔌 Added `lsp.md` - LSP integration guide (662 words)
+- 🌳 Added `treesitter.md` - Treesitter reference (781 words)
+- 📋 Added supporting files table with "When to Use" for each file
+- ✅ Tested file selection: 3/3 agents correctly chose relevant file
 
 ### v1.2 ✨
 
