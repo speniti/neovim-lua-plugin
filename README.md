@@ -4,6 +4,7 @@ A comprehensive reference skill for developing Lua plugins for Neovim following 
 
 ## 📑 Table of Contents
 
+- [Installation](#-installation)
 - [Type](#-type)
 - [When to Use](#-when-to-use)
 - [Key Principles](#-key-principles)
@@ -15,6 +16,19 @@ A comprehensive reference skill for developing Lua plugins for Neovim following 
 - [Statistics](#-statistics)
 - [Testing](#-testing)
 - [Enhancements](#-enhancements)
+
+---
+
+## 📥 Installation
+
+Clone this repository into your Claude skills directory:
+
+```bash
+# Claude Code
+git clone https://github.com/simonepeniti/neovim-lua-plugins.git ~/.claude/skills/neovim-lua-plugins
+```
+
+The skill will be automatically loaded when you work on Neovim Lua plugins.
 
 ---
 
