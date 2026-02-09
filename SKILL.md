@@ -59,3 +59,4 @@ https://neovim.io/doc/user/lua-plugin.html
 | `help-conventions.md` | Writing `:help` documentation (vimdoc files) |
 | `lsp.md` | Adding LSP integration to your plugin |
 | `treesitter.md` | Using Treesitter queries/parsing in your plugin |
+| `plenary.md` | Using plenary.nvim library (async, job, path, testing, etc.) |
